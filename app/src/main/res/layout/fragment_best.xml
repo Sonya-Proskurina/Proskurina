@@ -4,58 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginHorizontal="32dp"
         android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="5"
-            tools:layout_height="200dp"
-            tools:layout_width="300dp" />
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="visible" />
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_weight="5" />
+
     </FrameLayout>
 
     <TextView
-        android:gravity="center"
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/black"
         android:layout_marginHorizontal="16dp"
-        android:text="Загрузка" />
+        android:gravity="center"
+        android:text="Загрузка"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/buttonNew"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
         android:text="Новая" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonOld"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="32dp"
         android:layout_marginTop="8dp"
-        android:background="@color/gray"
         android:layout_marginBottom="16dp"
+        android:background="@color/gray"
+        android:padding="8dp"
+        android:textColor="@color/white"
         android:text="Предыдущая" />
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.proskurina;
+package com.example.proskurina.ui;
 
 
 import androidx.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.example.proskurina.fragment;
+package com.example.proskurina.ui.fragment;
 
 import android.os.Bundle;
 
@@ -17,8 +17,8 @@ import com.example.proskurina.App;
 import com.example.proskurina.R;
 import com.example.proskurina.database.Gif;
 
+public class BestFragment extends Fragment {
 
-public class LastFragment extends Fragment {
     ImageView gifka;
     TextView text;
     Button newGif, oldGif;
@@ -26,13 +26,12 @@ public class LastFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_last, container, false);
+        View view = inflater.inflate(R.layout.fragment_best, container, false);
 
         gifka = view.findViewById(R.id.image);
         text = view.findViewById(R.id.text);
@@ -40,31 +39,40 @@ public class LastFragment extends Fragment {
         oldGif = view.findViewById(R.id.buttonOld);
 
         text.setText("Когда хочешь быстро разобраться с реактивным программированием и архитектурой для тестовго задания смены в Сириусе");
-        Glide.with(getContext()).asGif().load(R.drawable.sory).into(gifka);
+        Glide.with(getContext()).asGif().load(R.drawable.bad).into(gifka);
 
         newGif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Gif gif = App.repository.newGif2();
+                Gif gif = App.repository.newGif();
 
-                Log.e("listSize ", App.repository.listSize2() + "");
-                Log.e("Num ", App.repository.getNum2() + "");
+                if (gif.type != -1) {
+                    Log.e("listSize ", App.repository.listSize() + "");
+                    Log.e("Num ", App.repository.getNum() + "");
 
-                text.setText(gif.text);
-                Glide.with(getContext()).asGif().load(gif.url).into(gifka);
-                oldGif.setBackgroundResource(R.color.design_default_color_primary);
+                    if (gif.type != -1) {
+                        text.setText(gif.text);
+                        Glide.with(getContext()).asGif().load(gif.url).into(gifka);
+                        oldGif.setBackgroundResource(R.color.design_default_color_primary);
+                    }
+
+                    oldGif.setBackgroundResource(R.color.design_default_color_primary);
+
+                } else {
+                    text.setText("Ошибка! Проверьте свое интернет соединение");
+                }
             }
         });
 
         oldGif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (App.repository.getInd2() > 0) {
-                    Gif gif = App.repository.oldGif2();
+                if (App.repository.getInd() > 3) {
+                    Gif gif = App.repository.oldGif();
                     text.setText(gif.text);
                     Glide.with(getContext()).asGif().load(gif.url).into(gifka);
                 }
-                if (App.repository.getInd2()==0)  oldGif.setBackgroundResource(R.color.gray);
+                if (App.repository.getInd() == 3) oldGif.setBackgroundResource(R.color.gray);
             }
         });
 
