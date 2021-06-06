@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +34,8 @@ public class BestFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_best, container, false);
 
+        final Animation anima = AnimationUtils.loadAnimation(getContext(), R.anim.anim);
+
         gifka = view.findViewById(R.id.image);
         text = view.findViewById(R.id.text);
         newGif = view.findViewById(R.id.buttonNew);
@@ -44,6 +48,7 @@ public class BestFragment extends Fragment {
                     gifka.setImageResource(R.drawable.ic_internet);
                     text.setText("Ошибка! Проверьте свое интернет соединение");
                 } else {
+                    newGif.startAnimation(anima);
                     Repository.newGif();
                     oldGif.setBackgroundResource(R.color.purple_500);
                 }
@@ -57,6 +62,7 @@ public class BestFragment extends Fragment {
                     gifka.setImageResource(R.drawable.ic_internet);
                     text.setText("Ошибка! Проверьте свое интернет соединение");
                 } else {
+                    oldGif.startAnimation(anima);
                     Repository.oldGif();
                     if (Repository.ind == 0) {
                         oldGif.setBackgroundResource(R.color.gray);

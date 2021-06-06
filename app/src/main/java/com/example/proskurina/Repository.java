@@ -44,7 +44,7 @@ public class Repository {
                     public void onSuccess(List<Gif> gif) {
                         list = gif;
 
-                        //Если лист заполняем его
+                        //Если пуст лист заполняем его
                         if (list.size() == 0) {
                             NetworkService.getInstance()
                                     .getJSONApi()
