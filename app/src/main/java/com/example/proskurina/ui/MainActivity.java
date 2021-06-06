@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.example.proskurina.R;
 import com.example.proskurina.databinding.ActivityMainBinding;
 import com.example.proskurina.ui.fragment.BestFragment;
-import com.example.proskurina.ui.fragment.HotterFragment;
 import com.example.proskurina.ui.fragment.LastFragment;
 
 
@@ -26,12 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
     }
 
-    //Создание разделов в viewPager
     private void setUpWithViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragments(new LastFragment(), "Последние");
         adapter.addFragments(new BestFragment(), "Лучшие");
-        adapter.addFragments(new HotterFragment(), "Горячие");
         viewPager.setAdapter(adapter);
     }
 }

@@ -1,10 +1,10 @@
 package com.example.proskurina.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.proskurina.App;
 import com.example.proskurina.R;
-import com.example.proskurina.database.Gif;
+import com.example.proskurina.Repository;
 
 public class BestFragment extends Fragment {
 
-    ImageView gifka;
-    TextView text;
+    static ImageView gifka;
+    static TextView text;
     Button newGif, oldGif;
 
     @Override
@@ -38,28 +37,15 @@ public class BestFragment extends Fragment {
         newGif = view.findViewById(R.id.buttonNew);
         oldGif = view.findViewById(R.id.buttonOld);
 
-        text.setText("Когда хочешь быстро разобраться с реактивным программированием и архитектурой для тестовго задания смены в Сириусе");
-        Glide.with(getContext()).asGif().load(R.drawable.bad).into(gifka);
-
         newGif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Gif gif = App.repository.newGif();
-
-                if (gif.type != -1) {
-                    Log.e("listSize ", App.repository.listSize() + "");
-                    Log.e("Num ", App.repository.getNum() + "");
-
-                    if (gif.type != -1) {
-                        text.setText(gif.text);
-                        Glide.with(getContext()).asGif().load(gif.url).into(gifka);
-                        oldGif.setBackgroundResource(R.color.design_default_color_primary);
-                    }
-
-                    oldGif.setBackgroundResource(R.color.design_default_color_primary);
-
-                } else {
+                if (!Repository.isOnline(getContext())) {
+                    gifka.setImageResource(R.drawable.ic_internet);
                     text.setText("Ошибка! Проверьте свое интернет соединение");
+                } else {
+                    Repository.newGif();
+                    oldGif.setBackgroundResource(R.color.purple_500);
                 }
             }
         });
@@ -67,15 +53,28 @@ public class BestFragment extends Fragment {
         oldGif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (App.repository.getInd() > 3) {
-                    Gif gif = App.repository.oldGif();
-                    text.setText(gif.text);
-                    Glide.with(getContext()).asGif().load(gif.url).into(gifka);
+                if (!Repository.isOnline(getContext())) {
+                    gifka.setImageResource(R.drawable.ic_internet);
+                    text.setText("Ошибка! Проверьте свое интернет соединение");
+                } else {
+                    Repository.oldGif();
+                    if (Repository.ind == 0) {
+                        oldGif.setBackgroundResource(R.color.gray);
+                    }
                 }
-                if (App.repository.getInd() == 3) oldGif.setBackgroundResource(R.color.gray);
             }
         });
-
         return view;
     }
+
+    public static void loading(Context context) {
+        if (!Repository.isOnline(context) ){
+            gifka.setImageResource(R.drawable.ic_internet);
+            text.setText("Ошибка! Проверьте свое интернет соединение");
+        } else {
+            text.setText(Repository.list.get(Repository.ind).text + "");
+            Glide.with(context).asGif().load(Repository.list.get(Repository.ind).url).into(gifka);
+        }
+    }
+
 }

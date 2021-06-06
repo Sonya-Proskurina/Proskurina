@@ -10,7 +10,6 @@ import com.example.proskurina.database.AppDatabase;
 public class App extends Application {
 
     public static App instance;
-    public static Repository repository;
     private AppDatabase database;
 
     @Override
@@ -18,7 +17,9 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, "database").build();
-        repository = new Repository();
+
+        Repository repository = new Repository();
+        repository.firstStart(getBaseContext());
     }
 
     public static App getInstance() {
