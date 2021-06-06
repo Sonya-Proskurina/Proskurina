@@ -11,6 +11,7 @@ public class App extends Application {
 
     public static App instance;
     private AppDatabase database;
+    private Repository repository;
 
     @Override
     public void onCreate() {
@@ -18,7 +19,7 @@ public class App extends Application {
         instance = this;
         database = Room.databaseBuilder(this, AppDatabase.class, "database").build();
 
-        Repository repository = new Repository();
+        repository = new Repository();
         repository.firstStart(getBaseContext());
     }
 
