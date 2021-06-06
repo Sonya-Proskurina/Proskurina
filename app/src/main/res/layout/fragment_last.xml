@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/image"
@@ -39,14 +39,17 @@
         android:text="Загрузка"
         android:textColor="@color/black" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonNew"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
-        android:text="Новая" />
+        android:background="@color/purple_500"
+        android:padding="8dp"
+        android:text="Новая"
+        android:textColor="@color/white" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonOld"
@@ -58,7 +61,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/gray"
         android:padding="8dp"
-        android:textColor="@color/white"
-        android:text="Предыдущая" />
+        android:text="Предыдущая"
+        android:textColor="@color/white" />
 
 </LinearLayout>
